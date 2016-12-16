@@ -47,25 +47,6 @@ class Tool {
 	}
 
 	/**
-	 * 下载文件
-	 *
-	 * @param $filepath
-	 */
-	public function download( $filepath, $name = '' ) {
-		if ( is_file( $filepath ) ) {
-			header( 'Content-Description: File Transfer' );
-			header( 'Content-Type: application/octet-stream' );
-			header( 'Content-Disposition: attachment; filename=' . ( $name ?: basename( $filepath ) ) );
-			header( 'Content-Transfer-Encoding: binary' );
-			header( 'Expires: 0' );
-			header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-			header( 'Pragma: public' );
-			header( 'Content-Length: ' . filesize( $filepath ) );
-			readfile( $filepath );
-		}
-	}
-
-	/**
 	 * 根据大小返回标准单位 KB  MB GB等
 	 *
 	 * @param int $size

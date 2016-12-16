@@ -6,14 +6,7 @@
 
 ####创建实例对象
 ```
-```
-
-
-####下载
-
-```
-//下载z.zip，下载文件名不a.zip
-$obj->download('z.zip','a.zip');
+$obj = new \houdunwang\tool\Tool();
 ```
 
 ####生成随机数
