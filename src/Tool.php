@@ -18,7 +18,7 @@ class Tool {
 	 *
 	 * @return mixed
 	 */
-	public function batchFunctions( $functions, $value ) {
+	public static function batchFunctions( $functions, $value ) {
 		$functions = is_array( $functions ) ? $functions : [ $functions ];
 		foreach ( $functions as $func ) {
 			$value = $func( $value );
@@ -35,7 +35,7 @@ class Tool {
 	 *
 	 * @return string
 	 */
-	public function rand( $len = 4 ) {
+	public static function rand( $len = 4 ) {
 		$str = '0123456789';
 		$s   = '';
 		for ( $i = 0;$i < $len;$i ++ ) {
@@ -54,7 +54,7 @@ class Tool {
 	 *
 	 * @return string
 	 */
-	public function getSize( $size, $decimals = 2 ) {
+	public static function getSize( $size, $decimals = 2 ) {
 		switch ( true ) {
 			case $size >= pow( 1024, 3 ):
 				return round( $size / pow( 1024, 3 ), $decimals ) . " GB";
