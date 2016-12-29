@@ -1,4 +1,5 @@
 <?php namespace houdunwang\tool;
+use houdunwang\framework\build\Facade;
 
 /** .-------------------------------------------------------------------
  * |  Software: [HDCMS framework]
@@ -9,9 +10,7 @@
  * | Copyright (c) 2012-2019, www.houdunwang.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-use hdphp\kernel\ServiceFacade;
-
-class ToolFacade extends ServiceFacade {
+class ToolFacade extends Facade {
 	public static function getFacadeAccessor() {
 		return 'Tool';
 	}

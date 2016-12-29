@@ -1,4 +1,7 @@
 <?php namespace houdunwang\tool;
+
+use houdunwang\tool\build\Base;
+
 /** .-------------------------------------------------------------------
  * |  Software: [HDCMS framework]
  * |      Site: www.hdcms.com
@@ -7,63 +10,35 @@
  * |    WeChat: aihoudun
  * | Copyright (c) 2012-2019, www.houdunwang.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
-
 class Tool {
+//连接
+	protected $link = null;
 
-	/**
-	 * 批量执行函数
-	 *
-	 * @param $functions
-	 * @param $value
-	 *
-	 * @return mixed
-	 */
-	public static function batchFunctions( $functions, $value ) {
-		$functions = is_array( $functions ) ? $functions : [ $functions ];
-		foreach ( $functions as $func ) {
-			$value = $func( $value );
-		}
+	//更改缓存驱动
+	protected function driver() {
+		$this->link = new Base();
 
-		return $value;
+		return $this;
 	}
 
-
-	/**
-	 * 生成随机数字
-	 *
-	 * @param int $len 数量
-	 *
-	 * @return string
-	 */
-	public static function rand( $len = 4 ) {
-		$str = '0123456789';
-		$s   = '';
-		for ( $i = 0;$i < $len;$i ++ ) {
-			$pos = mt_rand( 0, strlen( $str ) - 1 );
-			$s .= $str[ $pos ];
+	public function __call( $method, $params ) {
+		if ( is_null( $this->link ) ) {
+			$this->driver();
 		}
 
-		return $s;
+		return call_user_func_array( [ $this->link, $method ], $params );
 	}
 
-	/**
-	 * 根据大小返回标准单位 KB  MB GB等
-	 *
-	 * @param int $size
-	 * @param int $decimals 小数位
-	 *
-	 * @return string
-	 */
-	public static function getSize( $size, $decimals = 2 ) {
-		switch ( true ) {
-			case $size >= pow( 1024, 3 ):
-				return round( $size / pow( 1024, 3 ), $decimals ) . " GB";
-			case $size >= pow( 1024, 2 ):
-				return round( $size / pow( 1024, 2 ), $decimals ) . " MB";
-			case $size >= pow( 1024, 1 ):
-				return round( $size / pow( 1024, 1 ), $decimals ) . " KB";
-			default:
-				return $size . 'B';
+	public static function single() {
+		static $link;
+		if ( is_null( $link ) ) {
+			$link = new static();
 		}
+
+		return $link;
+	}
+
+	public static function __callStatic( $name, $arguments ) {
+		return call_user_func_array( [ static::single(), $name ], $arguments );
 	}
 }
