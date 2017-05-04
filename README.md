@@ -17,21 +17,21 @@ composer require houdunwang/tool
 ####生成随机数
 ```
 //生成10位随机数
-\houdunwang\tool\Tool::rand(10);
+Tool::rand(10);
 ```
 
 ####批量执行函数
 ```
 $funcs=['md5','strtoupper'];
 $value='houdunwang';
-\houdunwang\tool\Tool::batchFunctions($funcs,$value);
+Tool::batchFunctions($funcs,$value);
 //一个函数时的执行
-\houdunwang\tool\Tool::batchFunctions('md5','hdphp');
+Tool::batchFunctions('md5','hdphp');
 ```
 
 ####可识别的单位
 根据大小返回标准单位 KB  MB GB等
 ```
-\houdunwang\tool\Tool::getSize(20000,2);
+Tool::getSize(20000,2);
 //计算20000是GB还是MB，并返回2位小数
 ```
