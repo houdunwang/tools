@@ -49,6 +49,24 @@ class Base
         return $s;
     }
 
+     /**
+     * 产生随机字符串
+     *
+     * @param int $length
+     *
+     * @return string
+     */
+    public function randStr($length = 32)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+        $str   = "";
+        for ($i = 0; $i < $length; $i++) {
+            $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+        }
+
+        return $str;
+    }
+
     /**
      * 根据大小返回标准单位 KB  MB GB等
      *
