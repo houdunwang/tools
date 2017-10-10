@@ -23,11 +23,8 @@ class ToolProvider extends Provider
 
     public function register()
     {
-        $this->app->single(
-            'Tool',
-            function ($app) {
-                return new Tool();
-            }
-        );
+        $this->app->single('Tool', function ($app) {
+            return new Tool();
+        });
     }
 }
